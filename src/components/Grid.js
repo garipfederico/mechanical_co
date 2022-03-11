@@ -1,4 +1,4 @@
-import Card from './card'
+import Card from './CardGeneric'
 
 export default function Cards() {
     // SET VARIABLES FROM HERE

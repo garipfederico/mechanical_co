@@ -21,21 +21,19 @@ export default class card extends Component {
         const date = new Date();
         date.setTime(res.data.time)
         const time = date.toLocaleTimeString()
-
         this.setState({
           success: res.data.success,
           message: res.data.message.split(" ")[0],
           hostname: res.data.hostname,
           time: time
         })
-      }
-      )
+      })
       .catch(function (error) {
         if (error.request) {
           successErr = true;
-          if (error.request.status === 0) { }
+          if (error.request.status === 0) {
           status = "Status " + error.request.status;
-
+          }
           if (error.request.status === 503) {
             status = error.request.status + " Service Unavailable";
           }
@@ -55,7 +53,8 @@ export default class card extends Component {
           })
         }
       }
-      )}
+      )
+    }
 
   componentDidMount() {
     this.getFromAPI();
