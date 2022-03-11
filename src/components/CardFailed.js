@@ -8,7 +8,7 @@ function CardFailed(props) {
                                 {props.name.toUpperCase()}
                             </div>
                             <div className="card-body">
-                                <h5 className="card-title bg-danger text-white p-1"> {props.message}</h5>
+                                <h5 className="card-title bg-danger text-white p-1"> {props.apiHealthStatus}</h5>
                                 <p className="card-text text-danger h6">{props.errMessage}</p>
                             </div>
                             <div className="card-footer text-muted">

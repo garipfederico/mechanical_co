@@ -6,7 +6,7 @@ import CardFailed from './CardFailed'
 export default class card extends Component {
   state = {
     success: "",
-    message: "",
+    apiHealthStatus: "",
     hostname: "",
     time: "",
     errMessage: "",
@@ -23,7 +23,7 @@ export default class card extends Component {
         const time = date.toLocaleTimeString()
         this.setState({
           success: res.data.success,
-          message: res.data.message.split(" ")[0],
+          apiHealthStatus: res.data.message.split(" ")[0],
           hostname: res.data.hostname,
           time: time
         })
@@ -47,7 +47,7 @@ export default class card extends Component {
         if (successErr === true) {
           this.setState({
             success: false,
-            message: "Error",
+            apiHealthStatus: "Error",
             errMessage: "OUTAGE",
             errStatus: status
           })
@@ -69,7 +69,7 @@ export default class card extends Component {
     let cardOK = <CardOK
       order={this.props.order}
       name={this.props.name}
-      message={this.state.message}
+      apiHealthStatus={this.state.apiHealthStatus}
       hostname={this.state.hostname}
       time={this.state.time}
     >
@@ -78,7 +78,7 @@ export default class card extends Component {
     let cardFailed = <CardFailed
       order={this.props.order}
       name={this.props.name}
-      message={this.state.message}
+      apiHealthStatus={this.state.apiHealthStatus}
       errMessage={this.state.errMessage}
       status={this.state.errStatus}
     >
