@@ -10,7 +10,7 @@ function CardOK(props) {
                                 {props.name.toUpperCase()}
                             </div>
                             <div className="card-body">
-                                <h5 className="card-title bg-success text-white p-1"> {props.message}</h5>
+                                <h5 className="card-title bg-success text-white"> {props.message}</h5>
                                 <p className="card-text">{props.hostname}</p>
                             </div>
                             <div className="card-footer text-muted">

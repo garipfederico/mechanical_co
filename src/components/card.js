@@ -5,7 +5,6 @@ import CardFailed from './CardFailed'
 
 export default class card extends Component {
   state = {
-    seconds: 0,
     success: "",
     message: "",
     hostname: "",
@@ -14,13 +13,7 @@ export default class card extends Component {
     errStatus: ""
   }
 
-  timerUpdate() {
-    this.setState(prevState => ({
-      seconds: prevState.seconds + 15
-    }))
-  }
-
-  componentDidMount() {
+  getFromAPI() {
     let successErr = false;
     let status = '';
     axios.get('https://api.factoryfour.com/' + this.props.name + '/health/status')
@@ -41,7 +34,7 @@ export default class card extends Component {
         if (error.request) {
           successErr = true;
           if (error.request.status === 0) { }
-          status = "Status" + error.request.status;
+          status = "Status " + error.request.status;
 
           if (error.request.status === 503) {
             status = error.request.status + " Service Unavailable";
@@ -61,17 +54,20 @@ export default class card extends Component {
             errStatus: status
           })
         }
-        this.interval = setInterval(() => this.timerUpdate(), 60000);
-      })
+      }
+      )}
+
+  componentDidMount() {
+    this.getFromAPI();
+    this.interval = setInterval(() => this.getFromAPI(), this.props.secondsToUpdate*1000 );
   }
+
   componentWillUnmount() {
-     clearInterval(this.interval); }
-
-
-
+    clearInterval(this.interval);
+  }
 
   render() {
-    let cardok = <CardOK
+    let cardOK = <CardOK
       order={this.props.order}
       name={this.props.name}
       message={this.state.message}
@@ -80,7 +76,7 @@ export default class card extends Component {
     >
     </CardOK>;
 
-    let cardfailed = <CardFailed
+    let cardFailed = <CardFailed
       order={this.props.order}
       name={this.props.name}
       message={this.state.message}
@@ -91,8 +87,7 @@ export default class card extends Component {
 
     return (
       <div>
-        {(this.state.success) ? cardok : cardfailed}
-
+        {(this.state.success) ? cardOK : cardFailed}
       </div>
     )
   }

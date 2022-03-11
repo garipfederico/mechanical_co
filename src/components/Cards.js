@@ -1,24 +1,25 @@
 import Card from './card'
 
 export default function Cards() {
-     let API_NAMES = ["accounts", "assets", "customers", "datapoints",
+    // SET VARIABLES FROM HERE
+    // Name of API´S
+    const API_Names = ["accounts", "assets", "customers", "datapoints",
         "devices", "documents", "forms", "invites", "media", "messages",
         "namespaces", "orders", "patients", "relationships", "rules", "templates",
         "users", "workflows"]
-    // let API_NAMES = ["accounts",  "invites"]
-    
+
+    // Time to refresh/update the info from server (in seconds)
+    const secondsToUpdate = 15
+
+
     return (
-        <div>
-        
-
-
-
-   
-        <div className="d-flex align-content-start justify-content-start flex-wrap"> 
-        {/* <div className="container ">  */}
-
-            {API_NAMES.map((names, index) => <Card name={names} order={index} key={index} />)}
-            </div>
+        <div className="d-flex align-content-start justify-content-start flex-wrap">
+        {/* <div className="container "> */}
+            {API_Names.map((names, index) =>
+            <Card   name={names}
+                    secondsToUpdate={secondsToUpdate}
+                    order={index}
+                    key={index} />)}
         </div>
     )
 }

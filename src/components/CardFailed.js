@@ -2,7 +2,7 @@ import React from 'react'
 
 function CardFailed(props) {
   return (
-    <div className='mx-3 my-2'>
+    <div className='col mx-3 my-2'>
                 <div className="">
                     <div className={" rounded order-" + props.order}>
                          <div className="card shadow-lg  text-center">
